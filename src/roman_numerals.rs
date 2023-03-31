@@ -9,24 +9,24 @@ pub fn decimal_to_roman(number: u64) -> String {
         (1, 'I'),
     ];
 
-    let mut decimal_number = number;
+    let mut number = number;
     let mut roman_literal = String::new();
 
-    while decimal_number > 0 {
+    while number > 0 {
         for i in 0..conversion.len() {
             let (val_i, lit_i) = conversion[i];
-            if decimal_number >= val_i {
+            if number >= val_i {
                 roman_literal.push(lit_i);
-                decimal_number -= val_i;
+                number -= val_i;
                 break;
             } else {
                 for j in i + 1..conversion.len() {
                     let (val_j, lit_j) = conversion[j];
                     let diff = val_i - val_j;
-                    if diff <= decimal_number && diff != val_j {
+                    if diff <= number && diff != val_j {
                         roman_literal.push(lit_j);
                         roman_literal.push(lit_i);
-                        decimal_number -= diff;
+                        number -= diff;
                         break;
                     }
                 }
