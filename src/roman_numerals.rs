@@ -14,16 +14,18 @@ pub fn decimal_to_roman(number: u64) -> String {
 
     while decimal_number > 0 {
         for i in 0..conversion.len() {
-            if decimal_number >= conversion[i].0 {
-                roman_literal.push(conversion[i].1);
-                decimal_number -= conversion[i].0;
+            let (val_i, lit_i) = conversion[i];
+            if decimal_number >= val_i {
+                roman_literal.push(lit_i);
+                decimal_number -= val_i;
                 break;
             } else {
                 for j in i + 1..conversion.len() {
-                    let diff = conversion[i].0 - conversion[j].0;
-                    if diff <= decimal_number && diff != conversion[j].0 {
-                        roman_literal.push(conversion[j].1);
-                        roman_literal.push(conversion[i].1);
+                    let (val_j, lit_j) = conversion[j];
+                    let diff = val_i - val_j;
+                    if diff <= decimal_number && diff != val_j {
+                        roman_literal.push(lit_j);
+                        roman_literal.push(lit_i);
                         decimal_number -= diff;
                         break;
                     }
